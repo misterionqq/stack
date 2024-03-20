@@ -31,5 +31,5 @@ cmake-build-debug
 .idea
 CMakeCache.txt
 CMakeFiles/
-Makefile
+CMakeLists.txt
 build
