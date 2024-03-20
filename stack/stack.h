@@ -12,7 +12,8 @@ class Stack {
         T data;
         Node* next;
 
-        Node(T val) : data(val), next(nullptr) {}
+        Node(T val) : data(std::move(val)), next(nullptr) {} // Используем std::move для семантики перемещения
+
     };
     // Верхний узел стека
     Node* top_;
@@ -70,24 +71,31 @@ public:
         }
     }
 
-    // Push на стек
+    // push - копирование
     void push(const T& value) {
         Node* newNode = new Node(value);
         newNode->next = top_;
         top_ = newNode;
     }
 
-    // Pop со стека
+    // push - перемещение
+    void push(T&& value) {
+        Node* newNode = new Node(std::move(value));
+        newNode->next = top_;
+        top_ = newNode;
+    }
+
     T pop() {
         if (isEmpty()) {
             throw std::runtime_error("Stack is empty. Cannot pop.");
         }
-        Node* temp = top_;
-        T poppedValue = top_->data;
+        T poppedValue = std::move(top_->data);
+        Node* nodeToDelete = top_;
         top_ = top_->next;
-        delete temp;
+        delete nodeToDelete;
         return poppedValue;
     }
+
 
     // Чтение верхнего элемента стека
     T top() const {
