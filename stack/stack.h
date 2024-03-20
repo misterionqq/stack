@@ -71,20 +71,21 @@ public:
         }
     }
 
-    // push - копирование
+    // Push - копирование
     void push(const T& value) {
         Node* newNode = new Node(value);
         newNode->next = top_;
         top_ = newNode;
     }
 
-    // push - перемещение
+    // Push - перемещение
     void push(T&& value) {
         Node* newNode = new Node(std::move(value));
         newNode->next = top_;
         top_ = newNode;
     }
 
+    // Pop - т.к. элемент просто удаляется из стека и return'ится, то pop для обеих семантик один и тот же
     T pop() {
         if (isEmpty()) {
             throw std::runtime_error("Stack is empty. Cannot pop.");
