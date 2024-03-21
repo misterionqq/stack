@@ -23,7 +23,7 @@ $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Правило для создания объектных файлов
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(DEPS)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(DEPS) Makefile
 	@mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 
@@ -37,4 +37,3 @@ clean:
 
 # Объявляем фоновые цели
 .PHONY: all clean test
-
